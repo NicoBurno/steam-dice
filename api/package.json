@@ -1,0 +1,15 @@
+{
+  "name": "steam-dice-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "^4.15.0",
+    "morgan": "^1.8.1"
+  },
+  "description": "Steam casino enigne's API",
+  "main": "app.js",
+  "author": "NicoBurno & Asgator"
+}
