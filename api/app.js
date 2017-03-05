@@ -1,28 +1,27 @@
+
+// Bibliy
+// https://www.terlici.com/2014/08/25/best-practices-express-structure.html
+
 import express from 'express';
-import logger from 'morgan';
+import path from 'path';
+import ejs from 'ejs';
+
+import passport from './passport';
+import routes from './routes';
 
 const app = express();
 
-app.use(logger('dev'));
+// USE
+app.use('/static/build', express.static(path.join(__dirname, '../front/static/build')));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(routes);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-    const err = new Error('Not Found');
+// SET
+app.set('views', path.join(__dirname, '../front/static/build'));
+app.set('view engine', 'html');
 
-    err.status = 404;
+// ENGINE
+app.engine('html', ejs.renderFile);
 
-    next(err);
-});
-
-// error handler
-app.use((err, req, res) => {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-});
-
-export default app;
+app.listen(3000);

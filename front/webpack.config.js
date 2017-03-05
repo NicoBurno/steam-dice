@@ -8,7 +8,7 @@ const autoprefixer = require('autoprefixer');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProduction = nodeEnv === 'production';
 
-const buildPath = path.join(__dirname, './build');
+const buildPath = path.join(__dirname, './static/build');
 const staticPath = path.join(__dirname, './static');
 const srcPath = path.join(__dirname, './src');
 
@@ -127,7 +127,7 @@ module.exports = {
   },
   output: {
     path: buildPath,
-    publicPath: '/',
+    publicPath: '/static/build',
     filename: 'app-[hash].js',
   },
   module: {
@@ -139,7 +139,7 @@ module.exports = {
   },
   plugins,
   devServer: {
-    contentBase: isProduction ? './build' : './source',
+    contentBase: isProduction ? './static/build' : './source',
     historyApiFallback: true,
     port: 3000,
     compress: isProduction,
